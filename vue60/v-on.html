@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/vue/2.0.0-rc.1/vue.min.js"></script>
+</head>
+<body>
+  <div class="" id="app">
+    <p>
+      <input type="text" name="name" v-model="message">
+    </p>
+    <p>
+      <button v-on:click="greet">Greet</button>
+    </p>
+    <p>
+      <button v-on:click="say(message)">Hi</button>
+    </p>
+    <p>{{message}}</p>
+  </div>
+  <script>
+   var vm = new Vue({
+     el:'#app',
+     data:{
+      message:'hello world'
+    },
+    methods:{
+      greet:function() {
+        alert(this.message);
+      },
+      say:function (msg) {
+        alert(msg)
+      }
+    }
+   })
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-demo</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <style media="screen">
+    .table>thead>tr>th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #ddd;
+        background-color: #42b983;
+        color:#fff;
+    }
+
+    button {
+        background-color: #009a61;
+        color:#fff;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <legend>
+                添加新用户
+            </legend>
+            <div class="container">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" v-model="newPerson.name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Age:</label>
+                    <input type="text" v-model="newPerson.age" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Sex:</label>
+                    <select v-model="newPerson.sex">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <button type="button" v-on:click='addPerson'>添加</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(person,index) in people">
+                    <td>{{person.name}}</td>
+                    <td>{{person.age}}</td>
+                    <td>{{person.sex}}</td>
+                    <td class="'text-center'">
+                    <button v-on:click="deletePerson(index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<script src="http://cdn.bootcss.com/vue/2.0.0-rc.1/vue.min.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            newPerson:{
+                name:'',
+                age:0,
+                sex:'Male'
+            },
+            people:[{
+                name:'Jack',
+                age:30,
+                sex:'Male'
+            },{
+                name:'Bill',
+                age:26,
+                sex:'Male'
+            },{
+                name:'Tracy',
+                age:22,
+                sex:'Female'
+            },{
+                name:'Chiris',
+                age:36,
+                sex:'Male'
+            }]
+        },
+        created:function() {
+          var personStr = localStorage.getItem('person-list');
+          if(personStr){
+            this.people = JSON.parse(personStr);
+          }
+        },
+        methods:{
+            addPerson:function(){
+                this.people.push(this.newPerson);
+                localStorage.setItem("person-list",JSON.stringify(this.people));
+                this.newPerson = {
+                    name:'',
+                    age:0,
+                    sex:'Male'
+                }
+            },
+            deletePerson:function(index){
+                // console.log($index);
+                this.people.splice(index,1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

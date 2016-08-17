@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="http://cdn.bootcss.com/vue/1.0.26/vue.min.js"></script>
+</head>
+<body>
+  <div class="" id="app">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Sex</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="person in people">
+          <td>{{person.name}}</td>
+          <td>{{person.age}}</td>
+          <td>{{person.sex}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+   var vm = new Vue({
+     el:'#app',
+     data:{
+       people:[
+         {
+           name:'湛兴',
+           age:21,
+           sex:'男'
+         },
+         {
+           name:'mack',
+           age:21,
+           sex:'人妖'
+         },
+         {
+           name:'龚宏志',
+           age:21,
+           sex:'娘炮'
+         }
+       ]
+     }
+   })
+  </script>
+</body>
+</html>
